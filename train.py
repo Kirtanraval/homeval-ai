@@ -7,7 +7,8 @@ import pandas as pd
 import numpy as np
 import pickle
 import json
-
+import os
+os.makedirs("models", exist_ok=True)
 
 # Load Data
 df = pd.read_csv("data/home_data.csv")

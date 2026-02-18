@@ -545,11 +545,23 @@ hr{border-color:var(--border) !important;margin:0 !important;}
 # ─────────────────────────────────────────────────────────────
 # Load artifacts
 # ─────────────────────────────────────────────────────────────
+import os
+
 @st.cache_resource
 def load_artifacts():
-    with open("models/house_price_model.pkl","rb") as f: model=pickle.load(f)
-    with open("metrics.json","r") as f: metrics=json.load(f)
-    return model, metrics
+
+    # If model doesn't exist → train it
+    if not os.path.exists("models/house_price_model.pkl"):
+        import train  # this will create the model + metrics
+
+    with open("models/house_price_model.pkl","rb") as f:
+        model=pickle.load(f)
+
+    with open("metrics.json","r") as f:
+        metrics=json.load(f)
+
+    return model,metrics
+
 
 model, metrics = load_artifacts()
 
