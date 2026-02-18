@@ -55,26 +55,14 @@ for name, model in models.items():
 
 print("\n=== Tuning Random Forest ===")
 
-param_grid = {
-    'n_estimators': [100, 200, 300],
-    'max_depth': [None, 10, 20],
-    'min_samples_split': [2, 5],
-    'min_samples_leaf': [1, 2]
-}
-
-rf = RandomForestRegressor(random_state=42)
-
-grid_search = GridSearchCV(
-    rf,
-    param_grid,
-    cv=5,
-    n_jobs=-1,
-    verbose=2
+best_model = RandomForestRegressor(
+    n_estimators=120,
+    max_depth=20,
+    random_state=42,
+    n_jobs=-1
 )
 
-grid_search.fit(X_train, y_train)
-
-best_model = grid_search.best_estimator_
+best_model.fit(X_train, y_train)
 
 # Final Evaluation
 
