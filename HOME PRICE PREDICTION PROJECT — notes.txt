@@ -58,7 +58,7 @@ Better features → better model accuracy.
 4. TARGET TRANSFORMATION
    You used:
 
-y = log(price)
+y = log1p(price)  [mathematically: log(1 + price)]
 
 Why?
 
@@ -74,9 +74,12 @@ Log transformation:
 
 After prediction:
 You converted back using:
-expm1()
+expm1()  [mathematically: exp(1 + x) - 1, inverse of log1p]
 
 So final output is real price again.
+
+Note: log1p and expm1 are used because they handle edge cases better than
+log and exp functions (e.g., they work with small/zero values).
 
 ---
 
