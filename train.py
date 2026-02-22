@@ -118,3 +118,7 @@ importance_df = pd.DataFrame({
 
 print("\n=== Feature Importance ===")
 print(importance_df.head(10))
+
+features_columns = X.columns.tolist()
+with open("feature_columns.json", "w") as f:
+    json.dump(features_columns, f)
